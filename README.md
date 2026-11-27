@@ -1,2 +1,10 @@
-# the-centre-infrastructure
-A modern architecture, infrastructure, design, engineering and construction company website showcasing services, projects and expertise. Built with HTML, CSS and JavaScript, featuring a responsive UI and premium design.
+# THE CENTER INFRA
+
+## Commands
+
+- `npm run dev` starts the Vite development server.
+- `npm run build` creates the production build in `dist/`.
+- `npm run preview` serves the production build locally.
+- `npm run test:smoke` runs the Playwright route, interaction, and responsive checks. It uses Microsoft Edge at its standard Windows install path; set `PLAYWRIGHT_EXECUTABLE_PATH` to use another Chromium browser.
+
+The main routes are `/`, `/about`, `/services`, `/portfolio`, `/clients`, `/contact`, and `/projects?project=<project-id>`.
