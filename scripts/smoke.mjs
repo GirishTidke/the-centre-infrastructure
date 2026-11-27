@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { chromium } from 'playwright';
+import { BUSINESS_WHATSAPP_NUMBER } from '../src/config/business.js';
 
 const baseUrl = process.env.SMOKE_BASE_URL || 'http://127.0.0.1:5173';
 const executablePath = process.env.PLAYWRIGHT_EXECUTABLE_PATH || 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
@@ -9,6 +10,13 @@ const page = await browser.newPage({ viewport: { width: 1365, height: 900 } });
 const pageErrors = [];
 const consoleErrors = [];
 const badLocalResponses = [];
+await page.addInitScript(() => {
+  window.__openedWindows = [];
+  window.open = (url, target, features) => {
+    window.__openedWindows.push({ url: String(url), target, features });
+    return {};
+  };
+});
 page.on('pageerror', (error) => pageErrors.push(error.message));
 page.on('console', (message) => { if (message.type() === 'error') consoleErrors.push(message.text()); });
 page.on('response', (response) => {
@@ -102,8 +110,14 @@ try {
   await page.locator('#contact-email').fill('visitor@example.com');
   await page.locator('#contact-phone').fill('+91 80552 23358');
   await page.getByRole('button', { name: /Send enquiry/ }).click();
-  await page.getByRole('status').getByText(/Thanks for your enquiry/).waitFor({ state: 'visible' });
-  console.log('PASS contact form validation and success state');
+  await page.getByRole('status').getByText('WhatsApp is opening. Please press Send to submit your enquiry.').waitFor({ state: 'visible' });
+  assert.equal(await page.getByText('Thanks for your enquiry. Our team will be in touch.').count(), 0, 'the website must not claim the enquiry has been sent');
+  const desktopWhatsApp = await page.evaluate(() => window.__openedWindows.at(-1));
+  assert.equal(desktopWhatsApp.target, '_blank', 'WhatsApp must open in a new tab');
+  assert.equal(new URL(desktopWhatsApp.url).origin + new URL(desktopWhatsApp.url).pathname, `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}`);
+  const desktopMessage = 'New Website Enquiry – The Centre Infrastructure\n\nName: Test Visitor\nEmail: visitor@example.com\nPhone: +91 80552 23358\nProject Details: Request for an architectural design consultation.';
+  assert.equal(new URL(desktopWhatsApp.url).searchParams.get('text'), desktopMessage, 'desktop WhatsApp message contents');
+  console.log('PASS desktop WhatsApp click-to-chat flow');
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${baseUrl}/`, { waitUntil: 'domcontentloaded' });
@@ -114,6 +128,19 @@ try {
   await page.waitForURL('**/about');
   assert.equal(await page.getByRole('button', { name: 'Toggle navigation' }).getAttribute('aria-expanded'), 'false');
   console.log('PASS mobile navigation');
+
+  await page.goto(`${baseUrl}/contact`, { waitUntil: 'domcontentloaded' });
+  await page.locator('#contact-name').fill('Mobile Visitor');
+  await page.locator('#contact-email').fill('mobile@example.com');
+  await page.locator('#contact-phone').fill('+91 90000 00000');
+  await page.locator('#contact-message').fill('Mobile project enquiry.');
+  await page.getByRole('button', { name: /Send enquiry/ }).click();
+  await page.getByRole('status').getByText('WhatsApp is opening. Please press Send to submit your enquiry.').waitFor({ state: 'visible' });
+  const mobileWhatsApp = await page.evaluate(() => window.__openedWindows.at(-1));
+  assert.equal(mobileWhatsApp.target, '_blank', 'mobile WhatsApp must open the universal link in a new tab');
+  assert.equal(new URL(mobileWhatsApp.url).searchParams.get('text'), 'New Website Enquiry – The Centre Infrastructure\n\nName: Mobile Visitor\nEmail: mobile@example.com\nPhone: +91 90000 00000\nProject Details: Mobile project enquiry.');
+  assert.equal(await page.getByText('Thanks for your enquiry. Our team will be in touch.').count(), 0);
+  console.log('PASS mobile WhatsApp click-to-chat flow');
 
   const viewportChecks = [
     { width: 1365, height: 900, name: 'desktop' },
