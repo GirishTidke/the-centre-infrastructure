@@ -31,7 +31,7 @@ export default function ContactForm() {
     }
 
     const whatsappMessage = [
-      'New Website Enquiry – The Centre Infrastructure',
+      'New Website Enquiry – THE CENTER INFRA',
       '',
       `Name: ${name}`,
       `Email: ${email}`,

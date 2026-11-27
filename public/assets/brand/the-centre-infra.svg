@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-labelledby="logo-title logo-description">
-  <title id="logo-title">The Centre Infra</title>
+  <title id="logo-title">THE CENTER INFRA</title>
   <desc id="logo-description">Green and gold mandala with the Building Beyond Boundaries tagline.</desc>
   <g transform="translate(250 220)" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <circle r="132" stroke="#0f4b3b" stroke-width="7"/>
@@ -42,7 +42,7 @@
       <circle cx="-100.5" cy="-58" r="4.5"/><circle cx="-58" cy="-100.5" r="4.5"/>
     </g>
   </g>
-  <text x="250" y="389" text-anchor="middle" fill="#0f4b3b" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-weight="700" letter-spacing="5">THE CENTRE INFRA</text>
+  <text x="250" y="389" text-anchor="middle" fill="#0f4b3b" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-weight="700" letter-spacing="5">THE CENTER INFRA</text>
   <path d="M50 414H75M425 414H450" stroke="#b58b3a" stroke-width="3"/>
   <text x="250" y="420" text-anchor="middle" fill="#b58b3a" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="3">BUILDING BEYOND BOUNDARIES</text>
 </svg>

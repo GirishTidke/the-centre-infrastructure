@@ -6,7 +6,7 @@ export default function ProjectDetail() {
   const [searchParams] = useSearchParams();
   const { projectId } = useParams();
   const project = projects.find((item) => item.id === (projectId || searchParams.get('project'))) || projects[0];
-  usePageTitle(`${project.name} | THE CENTER INFRASTRUCTURES`, `${project.name}, ${project.category.toLowerCase()} project in ${project.location}.`);
+  usePageTitle(`${project.name} | THE CENTER INFRA`, `${project.name}, ${project.category.toLowerCase()} project in ${project.location}.`);
 
   return <main>
     <section className="project-detail-hero" style={{ '--project-image': `url("${projectImage(project.image)}")` }}><div className="container"><div className="eyebrow">{project.category} &middot; Selected Project</div><h1>{project.name}</h1><p>{project.location}</p></div></section>
