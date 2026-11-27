@@ -10,7 +10,7 @@ const categories = ['All', 'Residential', 'Commercial', 'Industrial'];
 export default function Portfolio() {
   const [category, setCategory] = useState('All');
   const visibleProjects = useMemo(() => category === 'All' ? projects : projects.filter((project) => project.category === category), [category]);
-  usePageTitle('Portfolio | THE CENTER INFRASTRUCTURES', 'Explore residential, commercial and industrial projects from THE CENTER INFRASTRUCTURES.');
+  usePageTitle('Portfolio | THE CENTER INFRA', 'Explore residential, commercial and industrial projects from THE CENTER INFRA.');
 
   return <main>
     <PageHero eyebrow="OUR PORTFOLIO" title="Our Selected Projects">Explore our work across residential, commercial and industrial developments.</PageHero>

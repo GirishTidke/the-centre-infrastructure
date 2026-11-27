@@ -1622,7 +1622,7 @@ button,input,select,textarea {
   display:block;
   color:var(--green-dark);
   font-family:Georgia,'Times New Roman',serif;
-  font-size:17px;
+  font-size:20px;
   font-weight:700;
   letter-spacing:.12em;
   line-height:1.15;
@@ -1638,7 +1638,7 @@ button,input,select,textarea {
 }
 
 @media(max-width:900px) {
-  .brand-wordmark { font-size:16px; }
+  .brand-wordmark { font-size:18px; }
 }
 
 @media(max-width:680px) {
@@ -1672,7 +1672,15 @@ button,input,select,textarea {
 }
 
 .footer-brand .brand-wordmark {
-  font-size:15px;
+  color:var(--orange);
+  font-size:19px;
+  letter-spacing:.1em;
+}
+
+@media(max-width:680px) {
+  .footer-brand .brand-wordmark {
+    font-size:15px;
+  }
 }
 
 .content-note {
@@ -1714,6 +1722,6 @@ button,input,select,textarea {
   .nav-wrap { gap:10px; }
   .brand { gap:8px; }
   .brand-symbol { flex-basis:46px; width:46px; height:46px; background-size:83px 83px; }
-  .brand-wordmark { font-size:10px; letter-spacing:.025em; }
+  .brand-wordmark { font-size:12px; letter-spacing:.025em; }
   .nav-links { top:74px; }
 }

@@ -11,9 +11,9 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container nav-wrap">
-        <Link className="brand" to="/" aria-label="THE CENTER INFRASTRUCTURES">
+        <Link className="brand" to="/" aria-label="THE CENTER INFRA">
           <span className="brand-symbol" aria-hidden="true" />
-          <span className="brand-wordmark" aria-hidden="true">THE CENTER INFRASTRUCTURES</span>
+          <span className="brand-wordmark" aria-hidden="true">THE CENTER INFRA</span>
         </Link>
         <button className="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
           &#9776;

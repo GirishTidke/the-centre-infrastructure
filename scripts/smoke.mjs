@@ -115,7 +115,7 @@ try {
   const desktopWhatsApp = await page.evaluate(() => window.__openedWindows.at(-1));
   assert.equal(desktopWhatsApp.target, '_blank', 'WhatsApp must open in a new tab');
   assert.equal(new URL(desktopWhatsApp.url).origin + new URL(desktopWhatsApp.url).pathname, `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}`);
-  const desktopMessage = 'New Website Enquiry – The Centre Infrastructure\n\nName: Test Visitor\nEmail: visitor@example.com\nPhone: +91 80552 23358\nProject Details: Request for an architectural design consultation.';
+  const desktopMessage = 'New Website Enquiry – THE CENTER INFRA\n\nName: Test Visitor\nEmail: visitor@example.com\nPhone: +91 80552 23358\nProject Details: Request for an architectural design consultation.';
   assert.equal(new URL(desktopWhatsApp.url).searchParams.get('text'), desktopMessage, 'desktop WhatsApp message contents');
   console.log('PASS desktop WhatsApp click-to-chat flow');
 
@@ -138,7 +138,7 @@ try {
   await page.getByRole('status').getByText('WhatsApp is opening. Please press Send to submit your enquiry.').waitFor({ state: 'visible' });
   const mobileWhatsApp = await page.evaluate(() => window.__openedWindows.at(-1));
   assert.equal(mobileWhatsApp.target, '_blank', 'mobile WhatsApp must open the universal link in a new tab');
-  assert.equal(new URL(mobileWhatsApp.url).searchParams.get('text'), 'New Website Enquiry – The Centre Infrastructure\n\nName: Mobile Visitor\nEmail: mobile@example.com\nPhone: +91 90000 00000\nProject Details: Mobile project enquiry.');
+  assert.equal(new URL(mobileWhatsApp.url).searchParams.get('text'), 'New Website Enquiry – THE CENTER INFRA\n\nName: Mobile Visitor\nEmail: mobile@example.com\nPhone: +91 90000 00000\nProject Details: Mobile project enquiry.');
   assert.equal(await page.getByText('Thanks for your enquiry. Our team will be in touch.').count(), 0);
   console.log('PASS mobile WhatsApp click-to-chat flow');
 

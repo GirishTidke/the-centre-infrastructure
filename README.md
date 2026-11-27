@@ -1,6 +1,4 @@
-# THE CENTER INFRASTRUCTURES
-
-React and Vite version of the site. The original static website remains in `urbanarchitects.co.in/` as a preserved source copy.
+# THE CENTER INFRA
 
 ## Commands
 
