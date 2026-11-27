@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { BUSINESS_WHATSAPP_NUMBER } from '../config/business';
 
 const emptyErrors = { name: '', email: '', phone: '', message: '' };
+const statusMessage = 'WhatsApp is opening. Please press Send to submit your enquiry.';
 
 export default function ContactForm() {
   const [errors, setErrors] = useState(emptyErrors);
-  const [sent, setSent] = useState(false);
+  const [whatsappOpening, setWhatsappOpening] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -24,11 +26,22 @@ export default function ContactForm() {
 
     setErrors(next);
     if (Object.values(next).some(Boolean)) {
-      setSent(false);
+      setWhatsappOpening(false);
       return;
     }
+
+    const whatsappMessage = [
+      'New Website Enquiry – The Centre Infrastructure',
+      '',
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${phone}`,
+      `Project Details: ${message}`,
+    ].join('\n');
+    const whatsappUrl = `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     event.currentTarget.reset();
-    setSent(true);
+    setWhatsappOpening(true);
   }
 
   const fields = [
@@ -52,7 +65,7 @@ export default function ContactForm() {
         <span className="field-error">{errors.message}</span>
       </div>
       <button className="button primary" type="submit">Send enquiry <span>&#8599;</span></button>
-      <div className={`form-status${sent ? ' show' : ''}`} role="status" aria-live="polite">Thanks for your enquiry. Our team will be in touch.</div>
+      <div className={`form-status${whatsappOpening ? ' show' : ''}`} role="status" aria-live="polite">{statusMessage}</div>
     </form>
   );
 }

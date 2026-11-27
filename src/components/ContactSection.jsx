@@ -1,4 +1,5 @@
 import ContactForm from './ContactForm';
+import { BUSINESS_WHATSAPP_NUMBER } from '../config/business';
 
 export default function ContactSection() {
   return (
@@ -9,7 +10,7 @@ export default function ContactSection() {
           <div>
             <div className="contact-detail"><span>Address</span><p>S. No. F-31, Sai Regency, Ravinagar Square, Ram Nagar, Nagpur, Maharashtra 440033</p></div>
             <div className="contact-detail"><span>Phone</span><a href="tel:+918055223358">+91 80552 23358</a></div>
-            <div className="contact-detail"><span>WhatsApp</span><a href="https://wa.me/918055223358">Chat with our team</a></div>
+            <div className="contact-detail"><span>WhatsApp</span><a href={`https://wa.me/${BUSINESS_WHATSAPP_NUMBER}`}>Chat with our team</a></div>
           </div>
           <ContactForm />
         </div>
