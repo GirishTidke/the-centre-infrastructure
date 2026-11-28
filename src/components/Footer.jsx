@@ -11,10 +11,10 @@ export default function Footer() {
               <span className="brand-symbol" aria-hidden="true" />
               <span className="brand-wordmark">THE CENTER INFRA</span>
             </div>
-            <p className="footer-sub">Architectural Interior Design, Engineering &amp; Execution, and Construction.</p>
+            <p className="footer-sub">Architectural Interior Design, Redevelopment &amp; Renovation, and Construction.</p>
           </div>
           <div className="footer-col"><h4>Company</h4><Link to="/about">About Us</Link><Link to="/portfolio">Portfolio</Link><Link to="/clients">Clients</Link></div>
-          <div className="footer-col"><h4>Services</h4><Link to="/services">Architectural Interior Design</Link><Link to="/services">Engineering &amp; Execution</Link><Link to="/services">Construction</Link></div>
+          <div className="footer-col"><h4>Services</h4><Link to="/services">Architectural Interior Design</Link><Link to="/services">Redevelopment &amp; Renovation</Link><Link to="/services">Construction</Link></div>
           <div className="footer-col"><h4>Connect</h4><div className="socials"><a href="tel:+918055223358">Instagram</a><a href="tel:+918055223358">LinkedIn</a><a href={`https://wa.me/${BUSINESS_WHATSAPP_NUMBER}`}>WhatsApp</a></div></div>
         </div>
         <div className="footer-bottom"><span>&copy; {new Date().getFullYear()} THE CENTER INFRA. All rights reserved.</span><span>Quality &middot; Precision &middot; Long-term value</span></div>
